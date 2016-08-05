@@ -4,3 +4,6 @@
 Homestead.yaml
 Homestead.json
 .env
+sftp-config.json
+.map
+/resources/assets
