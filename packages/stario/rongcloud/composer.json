@@ -1,0 +1,15 @@
+{
+    "name": "stario/rongcloud",
+    "require-dev": {
+        "stario/utils": "^0.1.0"
+    },
+    "require": {
+    	"php": ">=5.4.0"
+    },
+    //  "autoload": {
+    //     "psr-4": {
+    //         "Star\\rongcloud\\": "src/"
+    //     }
+    // },
+    "minimum-stability": "stable"
+}
