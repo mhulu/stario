@@ -13,12 +13,15 @@ class CreateUsersTable extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('name');
-            $table->string('email')->unique();
-            $table->string('password');
-            $table->rememberToken();
-            $table->timestamps();
+             $table->increments('id');
+             $table->string('mobile', 12)->unique();
+             $table->string('email');
+             $table->string('im_token')->comment('RongCloud Token');
+             $table->string('password');
+             $table->rememberToken();
+             $table->timestamp('last_login');
+             $table->string('last_ip',45);
+             $table->timestamps();
         });
     }
 
