@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a5913b026a1058312fa886c9f7006256",
-    "content-hash": "7b34db17883f8d5b1fe7cbe8002aa6d9",
+    "hash": "7c77e3f67fefe5cca1cbd5e894bc9956",
+    "content-hash": "ec7046731c4c32a6918b673012f2c1f9",
     "packages": [
         {
             "name": "barryvdh/laravel-cors",
@@ -1001,17 +1001,17 @@
             "time": "2016-03-09 05:03:14"
         },
         {
-            "name": "Star/laravel-permission",
-            "version": "1.5.1",
+            "name": "stario/permission",
+            "version": "dev-master",
             "source": {
                 "type": "git",
-                "url": "https://github.com/Star/laravel-permission.git",
-                "reference": "5b06b18f5e6dace43b54f4c6237751ce0ff1f95e"
+                "url": "https://github.com/mhulu/stario-permission.git",
+                "reference": "b68e86cd0dda3400f15875e4b0c0691e0ee9b8b7"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://packagist.phpcomposer.com/files/Star/laravel-permission/5b06b18f5e6dace43b54f4c6237751ce0ff1f95e.zip",
-                "reference": "5b06b18f5e6dace43b54f4c6237751ce0ff1f95e",
+                "url": "https://packagist.phpcomposer.com/files/mhulu/stario-permission/b68e86cd0dda3400f15875e4b0c0691e0ee9b8b7.zip",
+                "reference": "b68e86cd0dda3400f15875e4b0c0691e0ee9b8b7",
                 "shasum": ""
             },
             "require": {
@@ -1031,27 +1031,7 @@
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Freek Van der Herten",
-                    "email": "freek@Star.be",
-                    "homepage": "https://Star.be",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Permission handling for Laravel 5.1",
-            "homepage": "https://github.com/Star/laravel-permission",
-            "keywords": [
-                "acl",
-                "laravel",
-                "permission",
-                "security",
-                "Star"
-            ],
-            "time": "2016-07-23 22:52:29"
+            "time": "2016-08-07 15:49:38"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -3560,7 +3540,9 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {
+        "stario/permission": 20
+    },
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
