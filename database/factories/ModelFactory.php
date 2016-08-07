@@ -11,11 +11,19 @@
 |
 */
 
+$factory->define(App\Role::class, function (Faker\Generator $faker) {
+    $faker = Faker::create('zh_CN');
+    return [
+        'name' => $faker->unique()->randomElement(['Admin'])
+    ];
+});
+
 $factory->define(App\User::class, function (Faker\Generator $faker) {
+    $faker = Faker::create('zh_CN');
     return [
         'name' => $faker->name,
-        'email' => $faker->safeEmail,
-        'password' => bcrypt(str_random(10)),
-        'remember_token' => str_random(10),
+        'mobile' => $faker->phoneNumber,
+        'email' => $faker->email,
+        'password' => bcrypt('wemesh')
     ];
 });

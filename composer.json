@@ -10,8 +10,8 @@
          "predis/predis": "^1.0",
          "symfony/serializer": "^3.0",
          "symfony/property-access": "^3.0",
-         "bican/roles": "2.1.*",
-         "barryvdh/laravel-cors": "^0.8.1"
+         "barryvdh/laravel-cors": "^0.8.1",
+        "stario/stario-permission": "^1.5"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

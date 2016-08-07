@@ -149,8 +149,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Bican\Roles\RolesServiceProvider::class,
-
+        // Star\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
