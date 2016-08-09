@@ -1,0 +1,13 @@
+{
+    "name": "stario/icenter",
+    "require": {
+        "stario/permission": "dev-master",
+        "tymon/jwt-auth": "0.5.*"
+    },
+    "authors": [
+        {
+            "name": "Partoo Hwong",
+            "email": "partoo@163.com"
+        }
+    ]
+}

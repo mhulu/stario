@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace Star\Icenter;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Star\Permission\Traits\HasRoles;
