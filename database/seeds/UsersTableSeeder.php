@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     {
         $admin = Role::create([
             'name' => 'admin',
-           'label' => '管理员',
+           'name' => '管理员',
             'description' => '拥有最高权限,可以管理其他用户'
         ]);
     }
