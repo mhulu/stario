@@ -1,8 +1,11 @@
 <?php 
 namespace Star\Icenter\Repos\Contracts;
 
-interface IUser
+interface iUser
 {
-	public function getAllUserDetails();
-	public function getUserDetailsById($id);
+	// public function userInfo($uid);
+	// //Check users table if matched the  field and value.
+	// public function has($column, $value);
+ //        public function messages($uid);
+ //        public function isMobileExisted($mobile);
 }

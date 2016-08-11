@@ -6,12 +6,28 @@ use Star\Icenter\User;
 
 class UserRepo implements IUser
 {
-	public function getAllUserDetails()
+	protected $user;
+	public function __construct(User $user)
 	{
-		return User::all();
+		$this->user = $user;
 	}
-	public function getUserDetailsById($id)
+	public function userInfo($id)
 	{
-		# code...
+		if ($user = $this->has('id', $id)) {
+			return response()->json([
+					'name' => empty($user->name) ? $user->mobile : $user->name,
+					'avatar' => empty($user->avatar) ? 'http://static.stario.net/images/avatar.png' : $user->avatar,
+					'roles' => $user->roles
+				], 200);
+		}
+		return response()->json([
+				'msg' => '获取不到用户信息'
+			], 500);
 	}
+
+	public function has($column, $value)
+	{
+		return $this->user->where($column, $value)->first();
+	}
+
 }

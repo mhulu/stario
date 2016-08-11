@@ -11,10 +11,10 @@ use Star\Icenter\User;
 
 class AuthController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('jwt.auth', ['except' => ['login']]);
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('jwt.auth', ['except' => ['login']]);
+    // }
 
     public function register(Request $request)
     {
@@ -29,7 +29,6 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-
            $credentials = $request->only('mobile', 'password');
         try {
             // verify the credentials and create a token for the user
@@ -46,8 +45,11 @@ class AuthController extends Controller
           ], 200);
     }
 
-    public function getUserDetails()
+    public function refreshToken(Request $request)
     {
-        return User::all();
+        $token = $request->header('Authorization');
+        return response()->json([
+            'result' => JWTAuth::refresh(str_replace('Bearer ', '', $token))
+            ], 200);
     }
 }
