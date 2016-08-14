@@ -15,6 +15,18 @@ class IcenterServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->loadViewsFrom(__DIR__. '/resources/views', 'icenter');
+
+        $this->publishes([
+            __DIR__.'/resources/config/icenter.php' => $this->app->configPath().'/'.'icenter.php',
+        ], 'config');
+
+        if (!class_exists('CreateIcenterTables')) {
+            // Publish the migration
+            $timestamp = '1977_07_15_100000';
+            $this->publishes([
+                __DIR__.'/resources/migrations/create_icenter_tables.php.stub' => $this->app->databasePath().'/migrations/'.$timestamp.'_create_icenter_tables.php',
+            ], 'migrations');
+        }
     }
 
     /**

@@ -26,14 +26,14 @@ class AuthController extends Controller
           'result' => true
           ]);
     }
-
+    
     public function login(Request $request)
     {
            $credentials = $request->only('mobile', 'password');
         try {
             // verify the credentials and create a token for the user
             if (! $token = JWTAuth::attempt($credentials)) {
-                return response()->json(['result' => '手机号或密码错误'], 401);
+                return response()->json(['result' => '手机号或密码错误'], 403);
             }
         } catch (JWTException $e) {
             // something went wrong

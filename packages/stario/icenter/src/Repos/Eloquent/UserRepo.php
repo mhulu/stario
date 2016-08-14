@@ -17,7 +17,7 @@ class UserRepo implements IUser
 			return response()->json([
 					'name' => empty($user->name) ? $user->mobile : $user->name,
 					'avatar' => empty($user->avatar) ? 'http://static.stario.net/images/avatar.png' : $user->avatar,
-					'roles' => $user->roles
+					'role' => $user->roles->first()['label']
 				], 200);
 		}
 		return response()->json([
