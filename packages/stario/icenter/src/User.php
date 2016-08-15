@@ -3,6 +3,7 @@
 namespace Star\Icenter;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Star\Icenter\Profile;
 use Star\Icenter\Unit;
 use Star\Permission\Traits\HasRoles;
 class User extends Authenticatable
@@ -30,5 +31,9 @@ class User extends Authenticatable
     public function units()
     {
         return $this->belongsTo(Unit::class);
+    }
+    public function profiles()
+    {
+        return $this->hasOne(Profile::class);
     }
 }

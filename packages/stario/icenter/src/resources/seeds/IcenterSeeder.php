@@ -2,11 +2,11 @@
 namespace Star\Icenter\resources\seeds;
 
 use Illuminate\Database\Seeder;
+use Star\Icenter\Profile;
 use Star\Icenter\Unit;
 use Star\Icenter\User;
 use Star\Permission\Models\Permission;
 use Star\Permission\Models\Role;
-use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class IcenterSeeder extends Seeder
 {
@@ -38,14 +38,15 @@ class IcenterSeeder extends Seeder
             	'avatar' => 'http://tva3.sinaimg.cn/crop.0.0.996.996.180/7b9ce441jw8f6jzisiqduj20ro0roq4k.jpg',
             	'sex' => true,
 		'birthplace' => 'LA',
-            	'year' => 1977,
-            	'month' => 7,
-            	'day' => 15,
+            	'birthYear' => 1977,
+            	'birthMonth' => 7,
+            	'birthDay' => 15,
             	'unit_id' => 1
         ]);
 
         //关联用户和资料
-        $user->first->profile()->save($profile->first());
+        User::find(1)->profiles()->save($profile);
+        // $user->first->profile()->save($profile->first());
 
         //创建权限
         $permissionList = [
@@ -61,12 +62,11 @@ class IcenterSeeder extends Seeder
         //创建管理员角色
         $admin = Role::create([
             'name' => 'admin',
-           'label' => '管理员',
-            'description' => '拥有最高权限,可以管理其他用户'
+           'label' => '管理员'
         ]);
 
         foreach ($permissionList as $permission) {
-        	$admin->gievePermissionTo($permission['name']);
+        	$admin->givePermissionTo($permission['name']);
         }
         $user->first()->assignRole('admin');
     }

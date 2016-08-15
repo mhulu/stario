@@ -40,6 +40,20 @@ class CreateIcenterTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('profiles', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id');
+            $table->string('realname', 10);
+            $table->string('avatar', 100);
+            $table->boolean('sex');
+            $table->string('birthplace', 80);
+            $table->tinyInteger('birthYear');
+            $table->tinyInteger('birthMonth');
+            $table->tinyInteger('birthDay');
+            $table->tinyInteger('unit_id');
+            $table->timestamps();
+        });
+
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 10);
