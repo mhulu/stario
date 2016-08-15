@@ -1,6 +1,12 @@
 <?php
+namespace Star\Icenter\resources\seeds;
 
 use Illuminate\Database\Seeder;
+use Star\Icenter\Unit;
+use Star\Icenter\User;
+use Star\Permission\Models\Permission;
+use Star\Permission\Models\Role;
+use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class IcenterSeeder extends Seeder
 {
@@ -11,17 +17,22 @@ class IcenterSeeder extends Seeder
      */
     public function run()
     {
+        // 创建一个用户
         $user = User::create([
         	'mobile' => '18688889999',
         	'password' => bcrypt('password'),
         	'email' => 'demo@demo.com'        	
         ]);
 
-
+        // 创建一个部门
         $unit = Unit::create([
         	'name' => '办公室'
         ]);
+        // 关联用户和部门
+        
+        Unit::find(1)->users()->save($user);
 
+        // 创建一个用户资料
         $profile = Profile::create([
         	'realname' => '刘德华',
             	'avatar' => 'http://tva3.sinaimg.cn/crop.0.0.996.996.180/7b9ce441jw8f6jzisiqduj20ro0roq4k.jpg',
@@ -33,6 +44,10 @@ class IcenterSeeder extends Seeder
             	'unit_id' => 1
         ]);
 
+        //关联用户和资料
+        $user->first->profile()->save($profile->first());
+
+        //创建权限
         $permissionList = [
         	['name' => 'manage apps', 'label' => '管理应用'],
         	['name' => 'manage users', 'label' => '管理用户'],
@@ -43,6 +58,7 @@ class IcenterSeeder extends Seeder
         	Permission::create($permission);
         }
 
+        //创建管理员角色
         $admin = Role::create([
             'name' => 'admin',
            'label' => '管理员',
@@ -52,7 +68,6 @@ class IcenterSeeder extends Seeder
         foreach ($permissionList as $permission) {
         	$admin->gievePermissionTo($permission['name']);
         }
-        $user->assignRole('admin');
-
+        $user->first()->assignRole('admin');
     }
 }

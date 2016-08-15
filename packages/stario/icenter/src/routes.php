@@ -1,5 +1,8 @@
 <?php
-Route::group(['prefix' => 'api', 'middleware' => 'cors'], function () {
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Headers: Authorization, Content-Type');
+header('Access-Control-Allow-Methods:  POST, GET, OPTIONS, PUT, DELETE');
+Route::group(['prefix' => 'api'], function () {
   Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'AuthController@login');
     Route::post('refreshToken', ['uses' => 'AuthController@refreshToken',  'middleware' => 'jwt.refresh']);

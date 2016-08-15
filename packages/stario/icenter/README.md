@@ -14,3 +14,7 @@ Also included is a Facade for the PayloadFactory. This gives you finer control o
 4.You have to register middleware in app/Http/Kernel.php under the $routeMiddleware property:
 'jwt.auth' => \Tymon\JWTAuth\Middleware\GetUserFromToken::class,
 'jwt.refresh' => \Tymon\JWTAuth\Middleware\RefreshToken::class,
+5. Add this line below in *App\Http\Kernel.php*
+ ```'cors' => \Star\Icenter\Middleware\Cors::class,```
+6. Add this line below in *database\seeds\DatabaseSeeder.php*
+``` $this->call(Star\Icenter\resources\seeds\IcenterSeeder::class); ```

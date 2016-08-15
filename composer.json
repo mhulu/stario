@@ -10,7 +10,6 @@
          "predis/predis": "^1.0",
          "symfony/serializer": "^3.0",
          "symfony/property-access": "^3.0",
-         "barryvdh/laravel-cors": "^0.8.1",
          "stario/permission":"dev-master",
         "tymon/jwt-auth": "^0.5.9"
     },

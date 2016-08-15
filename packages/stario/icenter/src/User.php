@@ -3,6 +3,7 @@
 namespace Star\Icenter;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Star\Icenter\Unit;
 use Star\Permission\Traits\HasRoles;
 class User extends Authenticatable
 {
@@ -25,4 +26,9 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function units()
+    {
+        return $this->belongsTo(Unit::class);
+    }
 }

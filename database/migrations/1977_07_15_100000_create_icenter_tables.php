@@ -19,6 +19,7 @@ class CreateIcenterTables extends Migration
              $table->string('im_token')->comment('RongCloud Token');
              $table->string('password');
              $table->rememberToken();
+             $table->tinyInteger('unit_id');
              $table->timestamp('last_login');
              $table->string('last_ip',45);
              $table->timestamps();
@@ -29,6 +30,13 @@ class CreateIcenterTables extends Migration
             $table->string('name', 60);
             $table->string('description', 100);
             $table->string('icon', 60);
+            $table->timestamps();
+        });
+
+        Schema::create('units', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name', 60);
+            $table->string('label', 100);
             $table->timestamps();
         });
 
@@ -54,5 +62,8 @@ class CreateIcenterTables extends Migration
     {
         Schema::drop('apps');
         Schema::drop('menus');
+        Schema::drop('units');
+        Schema::drop('profiles');
+        Schema::drop('messages');
     }
 }
