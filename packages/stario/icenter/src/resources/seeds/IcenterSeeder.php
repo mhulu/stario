@@ -2,6 +2,8 @@
 namespace Star\Icenter\resources\seeds;
 
 use Illuminate\Database\Seeder;
+use Star\Icenter\App;
+use Star\Icenter\Menu;
 use Star\Icenter\Profile;
 use Star\Icenter\Unit;
 use Star\Icenter\User;
@@ -53,7 +55,6 @@ class IcenterSeeder extends Seeder
             'description' => 'WeMesh系统内置应用',
             'icon' => 'fa-codepen'
         ]);
-
         $menus = [
        // 父级菜单
             [
@@ -61,6 +62,14 @@ class IcenterSeeder extends Seeder
             'url' => '/',
             'icon' => 'fa-dashboard',
             'description' => '管理控制中心',
+            'app_id' => 1,
+            'parent_id' => 0
+            ],
+            [
+            'name' => '资讯发布',
+            'url' => 'post',
+            'icon' => 'fa-send',
+            'description' => '日常新闻资讯发布',
             'app_id' => 1,
             'parent_id' => 0
             ],
@@ -80,81 +89,67 @@ class IcenterSeeder extends Seeder
             'app_id' => 1,
             'parent_id' => 0
             ],
-            [
-            'name' => '资讯发布',
-            'url' => 'post',
-            'icon' => 'fa-send',
-            'description' => '日常新闻资讯发布',
-            'app_id' => 2,
-            'parent_id' => 0
-            ],
+            
         // 子级菜单
-        //第一梯队
+        // 第一梯队 无
+        //第二梯队
             [
-            'name' => '群发功能',
-            'url' => 'mass-send',
+            'name' => '资讯统计',
+            'url' => 'news',
             'icon' => 'reply_all',
-            'description' => '群发功能',
+            'description' => '新闻资讯相关统计',
             'app_id' => 1,
-            'parent_id' => 1
+            'parent_id' => 2
             ],
             [
-            'name' => '自动回复',
-            'url' => 'auto-reply',
-            'icon' => 'reply',
-            'description' => '自动回复',
+            'name' => '资讯编辑',
+            'url' => 'news/edit',
+            'icon' => 'fa-edit',
+            'description' => '新闻资讯编辑修改',
             'app_id' => 1,
-            'parent_id' => 1
+            'parent_id' => 2
             ],
             [
             'name' => '自定义菜单',
             'url' => 'custom-menu',
             'icon' => 'th-list',
-            'description' => '自定义菜单',
+            'description' => '新闻资讯菜单管理',
             'app_id' => 1,
-            'parent_id' => 1
+            'parent_id' => 2
             ],
-            [
-            'name' => '投票管理',
-            'url' => 'vote',
-            'icon' => 'fa-thumbs-o-up',
-            'description' => '投票管理',
-            'app_id' => 1,
-            'parent_id' => 1
-            ],
-         
             // 第三梯队
             [
-            'name' => '用户分析',
+            'name' => '修改个人资料',
             'url' => 'user-analysis',
             'icon' => 'male',
-            'description' => '用户分析',
+            'description' => '修改自己的个人资料',
             'app_id' => 1,
             'parent_id' => 3
             ],
             [
-            'name' => '图文分析',
+            'name' => '安全设置',
             'url' => 'app-analysis',
             'icon' => 'pie-chart',
-            'description' => '图文分析',
+            'description' => '修改自己的密码等',
             'app_id' => 1,
             'parent_id' => 3
             ],
+            //第四梯队
             [
-            'name' => '菜单分析',
-            'url' => 'menu-analysis',
-            'icon' => 'bar-chart',
-            'description' => '菜单分析',
+            'name' => '修改部门资料',
+            'url' => 'unit',
+            'icon' => 'fa-group',
+            'description' => '修改部门资料',
             'app_id' => 1,
-            'parent_id' => 3
+            'parent_id' => 4
             ],
             [
-            'name' => '消息分析',
-            'url' => 'message-analysis',
-            'icon' => 'fa-file-audio-o',
-            'description' => '消息分析',
+            'name' => '编辑部门人员',
+            'url' => 'unit',
+            'icon' => 'fa-group',
+            'description' => '编辑部门人员',
             'app_id' => 1,
-            'parent_id' => 3
+            'parent_id' => 4
             ]
         ];
         foreach ($menus as $menu) {

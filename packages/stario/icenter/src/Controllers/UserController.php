@@ -11,15 +11,17 @@ use Star\Icenter\User;
  */
 class UserController extends Controller
 {	
-	protected $user;
 	protected $repo;
-	function __construct(User $user)
+	function __construct()
 	{
-		$this->user = $user;
-		$this->repo = new UserRepo($this->user);
+		$this->repo = new UserRepo();
 	}
 	public function me()
 	{
-		return $this->repo->userInfo(Auth::user()->id);
+		return $this->repo->userInfo();
+  	}
+  	public function menuList()
+  	{
+  		return $this->repo->menuList();
   	}
 } 
