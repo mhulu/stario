@@ -11,7 +11,7 @@
          "symfony/serializer": "^3.0",
          "symfony/property-access": "^3.0",
          "stario/permission":"dev-master",
-        "tymon/jwt-auth": "^0.5.9"
+         "tymon/jwt-auth": "0.5.*"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

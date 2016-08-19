@@ -21,7 +21,7 @@ return [
     |
     */
 
-    'secret' => env('JWT_SECRET', '6RY6xAsZMElAJg7MbbjtxnR4Tmi2Ne69'),
+    'secret' => env('JWT_SECRET', 'HxYYnobOo1lSZtBEJlc8hSqG2mtoEfhK'),
 
     /*
     |--------------------------------------------------------------------------
@@ -33,7 +33,7 @@ return [
     |
     */
 
-    'ttl' => 60,
+    'ttl' => 90,
 
     /*
     |--------------------------------------------------------------------------

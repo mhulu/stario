@@ -152,6 +152,7 @@ return [
         Star\Permission\PermissionServiceProvider::class,
         Star\Icenter\IcenterServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
+
         /*
          * Package Service Providers...
          */

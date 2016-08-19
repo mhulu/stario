@@ -20,6 +20,14 @@ class IcenterServiceProvider extends ServiceProvider
             __DIR__.'/resources/config/icenter.php' => $this->app->configPath().'/'.'icenter.php',
         ], 'config');
 
+        $this->publishes([
+            __DIR__.'/resources/lang/zh-cn' => resource_path('lang/zh-cn'),
+        ], 'lang');
+
+        $this->publishes([
+        __DIR__.'/resources/assets' => public_path('assets'),
+    ], 'public');
+
         if (!class_exists('CreateIcenterTables')) {
             // Publish the migration
             $timestamp = '1977_07_15_100000';

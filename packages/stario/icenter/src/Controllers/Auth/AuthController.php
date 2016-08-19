@@ -1,6 +1,6 @@
 <?php
 
-namespace Star\Icenter\Controllers;
+namespace Star\Icenter\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests;
