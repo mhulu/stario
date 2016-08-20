@@ -1,13 +1,13 @@
-<?php 
+<?php
 namespace Star\Icenter\Repos\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Support\Facades\Auth;
 use Star\Icenter\Menu;
-use Star\Icenter\Repos\Contracts\IUser;
+use Star\Icenter\Repos\Contracts\iUser;
 use Star\Icenter\User;
 
-class UserRepo implements IUser
+class UserRepo implements iUser
 {
 	protected $user;
 	public function __construct()
