@@ -42,7 +42,6 @@ class CreateIcenterTables extends Migration
             $table->tinyInteger('birthYear');
             $table->tinyInteger('birthMonth');
             $table->tinyInteger('birthDay');
-            $table->tinyInteger('unit_id');
             $table->timestamps();
         });
                 
@@ -56,9 +55,9 @@ class CreateIcenterTables extends Migration
 
         Schema::create('menus', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('name', 10);
+            $table->string('name', 32);
             $table->string('url', 50);
-            $table->string('icon', 16);
+            $table->string('icon', 32);
             $table->string('description', 50);
             $table->integer('app_id')->unsigned()->nullable();
             $table->tinyInteger('parent_id')->unsigned()->default(0);

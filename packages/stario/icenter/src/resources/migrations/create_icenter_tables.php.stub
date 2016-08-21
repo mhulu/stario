@@ -42,7 +42,6 @@ class CreateIcenterTables extends Migration
             $table->tinyInteger('birthYear');
             $table->tinyInteger('birthMonth');
             $table->tinyInteger('birthDay');
-            $table->tinyInteger('unit_id');
             $table->timestamps();
         });
                 

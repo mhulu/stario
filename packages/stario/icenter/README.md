@@ -18,6 +18,12 @@
 ``` $this->call(Star\Icenter\resources\seeds\IcenterSeeder::class); ```
 7. Add this line in *config/jwt.php*
 ```     'user' => 'Star\Icenter\User', ```
+8. Add Event&Listener in app/Providers/EventServiceProvider as below:
+'''    protected $listen = [
+        'Star\Icenter\Events\LoginEvent' => [
+            'Star\Icenter\Listeners\EventListener',
+        ],
+    ];'''
 ## Usage
 ```  Route::group(['prefix' => 'user', 'middleware' => ['jwt.auth', 'role:admin,manage users']], function () {
     Route::get('me', 'UserController@me');

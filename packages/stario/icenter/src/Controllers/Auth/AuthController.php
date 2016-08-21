@@ -6,7 +6,10 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests;
 use Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use JWTAuth;
+use Star\Icenter\Events\LoginEvent;
 use Star\Icenter\User;
 
 class AuthController extends Controller
@@ -40,6 +43,7 @@ class AuthController extends Controller
             return response()->json(['result' => '服务器内部错误'], 500);
         }
         // if no errors are encountered we can return a JWT
+        Event::fire(new LoginEvent(User::find(Auth::user()->id)));
          return response()->json([
           'result' => $token
           ], 200);

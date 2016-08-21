@@ -42,8 +42,7 @@ class IcenterSeeder extends Seeder
 		'birthplace' => 'LA',
             	'birthYear' => 1977,
             	'birthMonth' => 7,
-            	'birthDay' => 15,
-            	'unit_id' => 1
+            	'birthDay' => 15
         ]);
 
         //关联用户和资料
@@ -111,7 +110,7 @@ class IcenterSeeder extends Seeder
             ],
             [
             'name' => '自定义菜单',
-            'url' => 'custom-menu',
+            'url' => 'news/menu',
             'icon' => 'th-list',
             'description' => '新闻资讯菜单管理',
             'app_id' => 1,
@@ -120,7 +119,7 @@ class IcenterSeeder extends Seeder
             // 第三梯队
             [
             'name' => '修改个人资料',
-            'url' => 'user-analysis',
+            'url' => '/profile/me',
             'icon' => 'male',
             'description' => '修改自己的个人资料',
             'app_id' => 1,
@@ -128,7 +127,7 @@ class IcenterSeeder extends Seeder
             ],
             [
             'name' => '安全设置',
-            'url' => 'app-analysis',
+            'url' => '/profile/security',
             'icon' => 'pie-chart',
             'description' => '修改自己的密码等',
             'app_id' => 1,
