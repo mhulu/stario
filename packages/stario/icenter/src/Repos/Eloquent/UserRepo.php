@@ -2,25 +2,34 @@
 namespace Star\Icenter\Repos\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Auth;
 use Star\Icenter\Menu;
 use Star\Icenter\Repos\Contracts\iUser;
 use Star\Icenter\User;
 
 class UserRepo implements iUser
 {
-	protected $user;
-	public function __construct()
+	// protected $user;
+	// public function __construct()
+	// {
+	// 	$this->user = new User;
+	// }
+	public function getUserInfo($id)
 	{
-		$this->user = User::find(Auth::user()->id);
-	}
-	public function userInfo()
-	{
-		if ($this->user) {
+              $user = User::find($id);
+		if ($user) {
 			return response()->json([
-					'name' => empty($this->user->profiles->realname) ? $this->user->mobile : $this->user->profiles->realname,
-					'avatar' => empty($this->user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' :$this->user->profiles->avatar,
-					'role' => $this->user->roles->first()['label']
+                                     'id' => $user->id,
+					'name' => empty($user->profiles->realname) ? $user->mobile : $user->profiles->realname,
+                                     'mobile' => $user->mobile,
+                                     'email' => empty($user->email) ? '暂无' : $user->email,
+					'avatar' => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' :$user->profiles->avatar,
+					'role' => $user->roles->first()['label'],
+                                      'unit' =>$user->unit->name,
+                                      'sex' => $user->profiles->sex ? '男' : '女',
+                                      'birthplace' => $user->profiles->birthplace,
+                                      'birthday' => $user->profiles->birthYear. '年' .$user->profiles->birthMonth.'月'.$user->profiles->birthDay.'日',
+                                      'last_login' => $user->last_login,
+                                      'last_ip' => $user->last_ip
 				], 200);
 		}
 		return response()->json([

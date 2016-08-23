@@ -11,7 +11,8 @@ Route::group(['prefix' => 'api', 'middleware' => 'throttle:60,1'], function () {
     Route::get('refreshToken', 'Auth\AuthController@refreshToken');
   });
   Route::group(['prefix' => 'user', 'middleware' => ['jwt.auth', 'throttle:60,1']], function () {
-    Route::get('me', 'UserController@me');
+    Route::get('me', 'UserController@getUserInfo');
+    Route::get('user/profile/{$id}', 'UserController@getUserInfo');
     Route::get('menu', 'UserController@menuList');
   });
 });

@@ -24,6 +24,7 @@
             'Star\Icenter\Listeners\EventListener',
         ],
     ];'''
+9.     ```'timezone' => 'Asia/Shanghai'``` in app.php
 ## Usage
 ```  Route::group(['prefix' => 'user', 'middleware' => ['jwt.auth', 'role:admin,manage users']], function () {
     Route::get('me', 'UserController@me');

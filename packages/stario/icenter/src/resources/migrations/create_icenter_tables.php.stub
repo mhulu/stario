@@ -19,7 +19,7 @@ class CreateIcenterTables extends Migration
              $table->string('im_token')->comment('RongCloud Token');
              $table->string('password');
              $table->rememberToken();
-             $table->tinyInteger('unit_id');
+             $table->tinyInteger('unit_id')->unsigned();
              $table->timestamp('last_login');
              $table->string('last_ip',45);
              $table->timestamps();
@@ -39,9 +39,9 @@ class CreateIcenterTables extends Migration
             $table->string('avatar', 100);
             $table->boolean('sex');
             $table->string('birthplace', 80);
-            $table->tinyInteger('birthYear');
-            $table->tinyInteger('birthMonth');
-            $table->tinyInteger('birthDay');
+            $table->smallInteger('birthYear')->unsigned();
+            $table->tinyInteger('birthMonth')->unsigned();
+            $table->tinyInteger('birthDay')->unsigned();
             $table->timestamps();
         });
                 

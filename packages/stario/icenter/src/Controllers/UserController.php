@@ -16,9 +16,12 @@ class UserController extends Controller
 	{
 		$this->repo = new UserRepo();
 	}
-	public function me()
+	public function getUserInfo($id=null)
 	{
-		return $this->repo->userInfo();
+              if (empty($id)) {
+                $id = Auth::user()->id;
+              }
+		return $this->repo->getUserInfo($id);
   	}
   	public function menuList()
   	{
