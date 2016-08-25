@@ -23,8 +23,8 @@ class UserController extends Controller
               }
 		return $this->repo->getUserInfo($id);
   	}
-  	public function menuList()
-  	{
-  		return $this->repo->menuList();
-  	}
+  	public function create(Request $request)
+        {
+              return $this->repo->create($request);
+        }
 } 

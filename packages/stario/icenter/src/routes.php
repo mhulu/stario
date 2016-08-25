@@ -13,6 +13,6 @@ Route::group(['prefix' => 'api', 'middleware' => 'throttle:60,1'], function () {
   Route::group(['prefix' => 'user', 'middleware' => ['jwt.auth', 'throttle:60,1']], function () {
     Route::get('me', 'UserController@getUserInfo');
     Route::get('user/profile/{$id}', 'UserController@getUserInfo');
-    Route::get('menu', 'UserController@menuList');
+    Route::post('create', 'UserController@create');
   });
 });

@@ -29,7 +29,8 @@ class UserRepo implements iUser
                                       'birthplace' => $user->profiles->birthplace,
                                       'birthday' => $user->profiles->birthYear. '年' .$user->profiles->birthMonth.'月'.$user->profiles->birthDay.'日',
                                       'last_login' => $user->last_login,
-                                      'last_ip' => $user->last_ip
+                                      'last_ip' => $user->last_ip,
+                                      'menuList' => $this->menuList()
 				], 200);
 		}
 		return response()->json([
@@ -37,17 +38,21 @@ class UserRepo implements iUser
 			], 500);
 	}
 
-	public function menuList()
+      public function has($column, $value)
+      {
+        return $this->user->where($column, $value)->first();
+      }
+
+      public function create(Request $request)
+      {
+        return $request;
+      }
+
+	private function menuList()
 	{
 		// return \Star\Permission\Models\Role::find(1)->permissions;
 		return $this->buildTree(Menu::all());
 	}
-
-	public function has($column, $value)
-	{
-		return $this->user->where($column, $value)->first();
-	}
-
  	private function buildTree(Collection $elements, $parent_id = 0)
     	{
        	 	$data = [];
@@ -62,5 +67,4 @@ class UserRepo implements iUser
        		}
        		return $data;
    	 }
-
 }
