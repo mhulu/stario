@@ -13,24 +13,67 @@ class UserRepo implements iUser
 	// {
 	// 	$this->user = new User;
 	// }
+	public function getUserList()
+	{
+		// if (isset($_GET['perpage']) && !empty($_GET['perpage'])) {
+		// 	$perpage = $_GET['perpage'];
+		// } else {
+		// 	$perpage = 15;
+		// }
+		$perpage = isset($_GET['perpage']);
+		if (empty($perpage)) {
+			$users = User::with('profiles')->get();
+		} else {
+			$users = User::with('profiles')->paginate($perpage);
+		}
+		return $users = User::with('profiles')->paginate(1);
+		$result = [
+			$users->map(function ($item){
+				return [
+					'id' => $item->id,
+					'name' => empty($item->profiles['realname']) ? '暂无' : $item->profiles['realname'],
+					'mobile' => $item->mobile,
+					'email' => empty($item->email) ? '暂无' : $item->email,
+					'avatar' => empty($item->profiles['avatar']) ? 'http://static.stario.net/images/avatar.png' :$item->profiles['avatar'],
+					'role' => $item->roles->first()['label'],
+					'unit'       =>$item->unit->name,
+					'sex'        => $item->profiles['sex'] ? '男' : '女',
+					'birthplace' => $item->profiles['birthplace'],
+					'birthday'   => $item->profiles['birthYear']. '年' .$item->profiles['birthMonth'].'月'.$item->profiles['birthDay'].'日',
+					'last_login' => $item->last_login,
+					'last_ip'    => $item->last_ip
+				];
+			})
+		];
+		// if (!empty($perpage)) {
+		// 	$paginateList = [
+		// 		$users->map(function ($item) {
+		// 			return [
+		// 				''
+		// 			];
+		// 		})
+		// 	];
+		// }
+		return $result;
+	}
 	public function getUserInfo($id)
 	{
               $user = User::find($id);
 		if ($user) {
 			return response()->json([
-                                     'id' => $user->id,
-					'name' => empty($user->profiles->realname) ? $user->mobile : $user->profiles->realname,
-                                     'mobile' => $user->mobile,
-                                     'email' => empty($user->email) ? '暂无' : $user->email,
-					'avatar' => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' :$user->profiles->avatar,
-					'role' => $user->roles->first()['label'],
-                                      'unit' =>$user->unit->name,
-                                      'sex' => $user->profiles->sex ? '男' : '女',
-                                      'birthplace' => $user->profiles->birthplace,
-                                      'birthday' => $user->profiles->birthYear. '年' .$user->profiles->birthMonth.'月'.$user->profiles->birthDay.'日',
-                                      'last_login' => $user->last_login,
-                                      'last_ip' => $user->last_ip,
-                                      'menuList' => $this->menuList()
+					'id'         => $user->id,
+					'name'       => empty($user->profiles->realname) ? $user->mobile : $user->profiles->realname,
+					'mobile'     => $user->mobile,
+					'email'      => empty($user->email) ? '暂无' : $user->email,
+					'avatar'     => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' :$user->profiles->avatar,
+					'role'       => $user->roles->first()['label'],
+					'unit'       =>$user->unit->name,
+					'sex'        => $user->profiles->sex ? '男' : '女',
+					'birthplace' => $user->profiles->birthplace,
+					'birthday'   => $user->profiles->birthYear. '年' .$user->profiles->birthMonth.'月'.$user->profiles->birthDay.'日',
+					'last_login' => $user->last_login,
+					'last_ip'    => $user->last_ip,
+					'menuList'   => $this->menuList()
 				], 200);
 		}
 		return response()->json([

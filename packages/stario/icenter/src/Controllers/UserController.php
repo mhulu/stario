@@ -16,15 +16,35 @@ class UserController extends Controller
 	{
 		$this->repo = new UserRepo();
 	}
-	public function getUserInfo($id=null)
+	public function index()
+	{
+		return $this->repo->getUserList();
+	}
+	public function create()
+	{
+        //
+	}
+	public function store(Request $request)
+	{
+		return $this->repo->create($request);
+	}
+	public function show($id=null)
 	{
               if (empty($id)) {
                 $id = Auth::user()->id;
               }
 		return $this->repo->getUserInfo($id);
   	}
-  	public function create(Request $request)
-        {
-              return $this->repo->create($request);
-        }
+  	public function edit($id=null)
+  	{
+  		# code...
+  	}
+  	public function update(Request $request, $id)
+  	{
+  		# code...
+  	}
+  	public function destroy($id)
+  	{
+  		# code...
+  	}
 } 

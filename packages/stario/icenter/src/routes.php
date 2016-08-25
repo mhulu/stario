@@ -10,9 +10,10 @@ Route::group(['prefix' => 'api', 'middleware' => 'throttle:60,1'], function () {
     Route::post('login', 'Auth\AuthController@login');
     Route::get('refreshToken', 'Auth\AuthController@refreshToken');
   });
-  Route::group(['prefix' => 'user', 'middleware' => ['jwt.auth', 'throttle:60,1']], function () {
+  Route::group(['middleware' => ['jwt.auth', 'throttle:60,1']], function () {
+    Route::resource('user', 'UserController');
     Route::get('me', 'UserController@getUserInfo');
-    Route::get('user/profile/{$id}', 'UserController@getUserInfo');
-    Route::post('create', 'UserController@create');
+    // Route::get('user/profile/{$id}', 'UserController@getUserInfo');
+    // Route::post('create', 'UserController@create');
   });
 });
