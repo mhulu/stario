@@ -24,8 +24,14 @@ class EventListener
      */
     public function handle(LoginEvent $event)
     {
-        $this->user->last_login = Carbon::now();
-        $this->user->last_ip = \Request::getClientIp();
+        $now = Carbon::now();
+        $ip = \Request::getClientIp();
+        $this->user->last_login = $now;
+        $this->user->last_ip = $ip;
         $this->user->save();
+        $this->user->events()->create([
+                'content' => '在'.$ip.'登陆',
+                'type' => 'success'
+            ]) ;
     }
 }

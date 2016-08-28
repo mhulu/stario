@@ -32,12 +32,22 @@ class CreateIcenterTables extends Migration
             $table->timestamps();
         });
 
+        Schema::create('events', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->string('content');
+            $table->string('type', 16);
+            $table->timestamps();
+        });
+
         Schema::create('profiles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('user_id');
             $table->string('realname', 10);
             $table->string('avatar', 100);
             $table->boolean('sex');
+            $table->string('qq', 30);
+            $table->string('wechat');
             $table->string('birthplace', 80);
             $table->smallInteger('birthYear')->unsigned();
             $table->tinyInteger('birthMonth')->unsigned();

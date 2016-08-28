@@ -36,4 +36,8 @@ class User extends Authenticatable
     {
         return $this->hasOne(Profile::class);
     }
+    public function events()
+    {
+        return $this->hasMany(Event::class);
+    }
 }

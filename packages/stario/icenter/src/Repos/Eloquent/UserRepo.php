@@ -80,18 +80,19 @@ class UserRepo implements iUser
 					'id'         => $user->id,
 					'name'       => empty($user->profiles->realname) ? $user->mobile : $user->profiles->realname,
 					'mobile'     => $user->mobile,
-					'email'      => empty($user->email) ? '暂无' : $user->email,
-					'avatar'     => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' :$user->profiles->avatar,
-					'role'       => $user->roles->first()['label'],
-					'unit'       =>$user->unit->name,
+					'email'      => empty($user->email) ? '尚未填写' : $user->email,
+					'avatar'     => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' : $user->profiles->avatar,
+					'role'       => empty($user->roles->first()['label']) ? '普通用户' : $user->roles->first()['label'],
+					'unit'       =>empty($user->unit->name) ? '尚未填写' : $user->unit->name,
 					'sex'        => $user->profiles->sex ? '男' : '女',
-					'birthplace' => $user->profiles->birthplace,
-					'birthYear'   => $user->profiles->birthYear,
-                                     'birthMonth' => $user->profiles->birthMonth,
-                                     'birthDay' => $user->profiles->birthDay,
+					'qq' => empty($user->profiles->qq) ? '尚未填写' : $user->profiles->qq,
+					'wechat' => empty($user->profiles->wechat) ? '尚未填写' : $user->profiles->wechat,
+					'birthplace' => empty($user->profiles->birthplace) ? '尚未填写' : $user->profiles->birthplace,
+                                  'birthday' => empty($user->profiles->birthYear.$user->profiles->birthMonth.$user->profiles->birthDay) ? '1900-1-1' : $user->profiles->birthYear.'-'.$user->profiles->birthMonth.'-'.$user->profiles->birthDay,
 					'last_login' => $user->last_login,
 					'last_ip'    => $user->last_ip,
-					'menuList'   => $this->menuList()
+					'menuList'   => $this->menuList(),
+					'events' => $this->events($id)->sortByDesc('id')->take(8)
 				], 200);
 		}
 		return response()->json([
@@ -112,6 +113,12 @@ class UserRepo implements iUser
       public function createUser($data)
       {
 
+      }
+
+      public function events($id)
+      {
+      		$user = User::find($id);
+      		return $user->events;
       }
 
       /**
