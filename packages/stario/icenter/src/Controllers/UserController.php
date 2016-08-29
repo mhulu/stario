@@ -4,6 +4,7 @@ namespace Star\Icenter\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Star\Icenter\Forms\UserInfoRequest;
 use Star\Icenter\Repos\Eloquent\UserRepo;
 use Star\Icenter\User;
 
@@ -37,11 +38,10 @@ class UserController extends Controller
   	{
   		# code...
   	}
-  	public function update(Request $request)
+  	public function update(UserInfoRequest $request, $id)
   	{
-              $data = array_except($request->all(), ['menuList']);
-              return $data;
-              return $this->repo->createUser($data);
+  		$data = $request->all();
+  		return $this->repo->updateUser($id, $data);
   	}
   	public function destroy($id)
   	{

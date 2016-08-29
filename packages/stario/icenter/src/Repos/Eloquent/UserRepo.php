@@ -74,7 +74,7 @@ class UserRepo implements iUser
    */
 	public function getUserInfo($id)
 	{
-              $user = User::find($id);
+              $user = User::findOrFail($id);
 		if ($user) {
 			return response()->json([
 					'id'         => $user->id,
@@ -117,8 +117,22 @@ class UserRepo implements iUser
 
       public function events($id)
       {
-      		$user = User::find($id);
+      		$user = User::findOrFail($id);
       		return $user->events;
+      }
+
+      public function updateUser($id, $data)
+      {
+      		$user = User::findOrFail($id);
+      		$user->profiles->realname = $data['name'];
+      		$user->profiles->birthYear = $this->splitBirthday($data['birthday']);
+      		$user->profiles->birthMonth = $this->splitBirthday($data['birthday'][1]);
+      		$user->profiles->birthDay = $this->splitBirthday($data['birthday'][2]);
+      		$user->profiles->sex = $data['sex'] == '男' ? 1 : 0; 
+      		$user->profiles->qq = $data['qq'];
+      		$user->email = $data['email'];
+      		$user->profiles->save();
+      		return response()->json(['result' => ['个人资料成功更改']], 200);
       }
 
       /**
@@ -126,7 +140,7 @@ class UserRepo implements iUser
        */
 	private function menuList()
 	{
-		// return \Star\Permission\Models\Role::find(1)->permissions;
+		// return \Star\Permission\Models\Role::findOrFail(1)->permissions;
 		return $this->buildTree(Menu::all());
 	}
   /**
@@ -148,5 +162,10 @@ class UserRepo implements iUser
        	     		}
        		}
        		return $data;
+   	 }
+
+   	 private function splitBirthday($birthday, $index = 0)
+   	 {
+   	 	return explode('-', $birthday) [$index];
    	 }
 }

@@ -8,7 +8,7 @@ use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Auth;
 use Star\Icenter\User;
 
-class LoginEvent extends Event
+class UserEvent extends Event
 {
     use SerializesModels;
     public $user;

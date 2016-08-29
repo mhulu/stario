@@ -6,9 +6,9 @@ use Carbon\Carbon;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Support\Facades\Auth;
-use Star\Icenter\Events\LoginEvent;
+use Star\Icenter\Events\UserEvent;
 
-class EventListener
+class LoginEventListener
 {
     protected $user;
     public function __construct()
@@ -22,7 +22,7 @@ class EventListener
      * @param  LoginEvent  $event
      * @return void
      */
-    public function handle(LoginEvent $event)
+    public function handle(UserEvent $event)
     {
         $now = Carbon::now();
         $ip = \Request::getClientIp();
