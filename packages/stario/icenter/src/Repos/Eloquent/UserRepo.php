@@ -131,8 +131,7 @@ class UserRepo implements iUser
       		$user->profiles->sex = $data['sex'] == '男' ? 1 : 0; 
       		$user->profiles->qq = $data['qq'];
       		$user->email = $data['email'];
-      		$user->profiles->save();
-      		return response()->json(['result' => ['个人资料成功更改']], 200);
+      		return $user->profiles->save();
       }
 
       /**

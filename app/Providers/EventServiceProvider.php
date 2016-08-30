@@ -14,8 +14,14 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $listen = [
         'Star\Icenter\Events\LoginEvent' => [
-            'Star\Icenter\Listeners\EventListener',
+            'Star\Icenter\Listeners\LoginEventListener'
         ],
+        'Star\Icenter\Events\UpdateUserEvent' => [
+            'Star\Icenter\Listeners\UpdateUserListener'
+        ],
+        'Star\Icenter\Events\UpdateCredentialsEvent' => [
+            'Star\Icenter\Listeners\UpdateCredentialsListener'
+        ]
     ];
 
     /**
