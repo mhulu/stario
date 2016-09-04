@@ -7,6 +7,9 @@ header('Access-Control-Allow-Methods:  POST, GET, PUT, DELETE');
 Route::get('/', ['uses' => 'HomeController@index', 'middleware' => 'web']);
 
 Route::group(['prefix' => 'api', 'middleware' => 'throttle:60,1'], function () {
+  Route::post('getsms','SmsController@authcode');
+  Route::post('signup','UserController@signup');
+
   Route::group(['prefix' => 'auth'], function () {
     Route::post('login', 'Auth\AuthController@login');
     Route::get('refreshToken', 'Auth\AuthController@refreshToken');

@@ -49,9 +49,9 @@ class CreateIcenterTables extends Migration
             $table->string('qq', 30);
             $table->string('wechat');
             $table->string('birthplace', 80);
-            $table->smallInteger('birthYear')->unsigned();
-            $table->tinyInteger('birthMonth')->unsigned();
-            $table->tinyInteger('birthDay')->unsigned();
+            $table->smallInteger('birthYear')->unsigned()->default(1900);
+            $table->tinyInteger('birthMonth')->unsigned()->default(1);
+            $table->tinyInteger('birthDay')->unsigned()->default(1);
             $table->timestamps();
         });
                 

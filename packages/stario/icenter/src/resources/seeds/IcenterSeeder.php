@@ -39,7 +39,7 @@ class IcenterSeeder extends Seeder
 			'realname' => '刘德华',
 				'avatar' => 'http://tva3.sinaimg.cn/crop.0.0.996.996.180/7b9ce441jw8f6jzisiqduj20ro0roq4k.jpg',
 				'sex' => true,
-		'birthplace' => 'LA',
+				'birthplace' => 'LA',
 				'birthYear' => 1977,
 				'birthMonth' => 7,
 				'birthDay' => 15,
@@ -61,6 +61,30 @@ class IcenterSeeder extends Seeder
 				'name' => '控制面板',
 				'url' => '/',
 				'icon' => 'fa-dashboard',
+				'description' => '管理控制中心',
+				'app_id' => 1,
+				'parent_id' => 0
+			],
+			[
+				'name' => '日程管理',
+				'url' => 'user/calendar',
+				'icon' => 'fa-calendar',
+				'description' => '用于管理个人日程',
+				'app_id' => 1,
+				'parent_id' => 0
+			],
+			[
+				'name' => '公告通知',
+				'url' => 'user/notify',
+				'icon' => 'fa-bell-o',
+				'description' => '管理控制中心',
+				'app_id' => 1,
+				'parent_id' => 0
+			],
+			[
+				'name' => '流动人口管理',
+				'url' => 'pop',
+				'icon' => 'fa-street-view',
 				'description' => '管理控制中心',
 				'app_id' => 1,
 				'parent_id' => 0
@@ -99,7 +123,7 @@ class IcenterSeeder extends Seeder
 				'icon' => 'reply_all',
 				'description' => '新闻资讯相关统计',
 				'app_id' => 1,
-				'parent_id' => 2
+				'parent_id' => 4
 			],
 			[
 				'name' => '资讯编辑',
@@ -107,7 +131,7 @@ class IcenterSeeder extends Seeder
 				'icon' => 'fa-edit',
 				'description' => '新闻资讯编辑修改',
 				'app_id' => 1,
-				'parent_id' => 2
+				'parent_id' => 4
 			],
 			[
 				'name' => '自定义菜单',
@@ -115,7 +139,7 @@ class IcenterSeeder extends Seeder
 				'icon' => 'th-list',
 				'description' => '新闻资讯菜单管理',
 				'app_id' => 1,
-				'parent_id' => 2
+				'parent_id' => 4
 			],
 			// 第三梯队
 			// [
@@ -141,7 +165,7 @@ class IcenterSeeder extends Seeder
 				'icon' => 'fa-group',
 				'description' => '修改部门资料',
 				'app_id' => 1,
-				'parent_id' => 4
+				'parent_id' => 6
 			],
 			[
 				'name' => '编辑部门人员',
@@ -149,7 +173,7 @@ class IcenterSeeder extends Seeder
 				'icon' => 'fa-group',
 				'description' => '编辑部门人员',
 				'app_id' => 1,
-				'parent_id' => 4
+				'parent_id' => 6
 			]
 		];
 		foreach ($menus as $menu) {
@@ -161,7 +185,7 @@ class IcenterSeeder extends Seeder
 			['name' => 'manage apps', 'label' => '管理应用'],
 			['name' => 'manage users', 'label' => '管理用户'],
 			['name' => 'manage posts', 'label' => '管理文章'],
-			['name' => 'manage menus', 'label' => '管理菜单'],
+			['name' => 'manage menus', 'label' => '管理菜单']
 		];
 		foreach ($permissionList  as $permission) {
 			Permission::create($permission);
@@ -172,6 +196,10 @@ class IcenterSeeder extends Seeder
 			'name' => 'admin',
 		   	'label' => '管理员'
 		]);
+		// $user = Role::create([
+		// 	'name' => 'user',
+		// 	'label' => '普通用户'
+		// ]);
 
 		foreach ($permissionList as $permission) {
 			$admin->givePermissionTo($permission['name']);

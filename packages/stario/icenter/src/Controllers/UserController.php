@@ -4,11 +4,12 @@ namespace Star\Icenter\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Star\Icenter\Events\UpdateUserEvent;
+use Star\Icenter\Forms\SignUpFormRequest;
 use Star\Icenter\Forms\UserInfoRequest;
 use Star\Icenter\Repos\Eloquent\UserRepo;
 use Star\Icenter\User;
-use Illuminate\Support\Facades\Event;
 
 /**
  *
@@ -25,6 +26,10 @@ class UserController extends Controller
 		return $this->repo->getUserList();
 	}
 
+        public function signup(SignUpFormRequest $request)
+        {
+          	return $request->persist();
+        }
 	public function store(Request $request)
 	{
 		// return $this->repo->createUser($request);

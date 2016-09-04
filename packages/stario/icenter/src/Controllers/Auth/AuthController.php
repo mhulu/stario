@@ -45,7 +45,10 @@ class AuthController extends Controller
         // if no errors are encountered we can return a JWT
         Event::fire(new LoginEvent(User::find(Auth::user()->id)));
          return response()->json([
-          'result' => $token
+          'result' => [
+          	'id' => Auth::user()->id,
+          	'token' => $token
+          ]
           ], 200);
     }
 

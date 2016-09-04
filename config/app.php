@@ -151,6 +151,7 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Star\Permission\PermissionServiceProvider::class,
         Star\Icenter\IcenterServiceProvider::class,
+        Star\sms\SmsServiceProvider::class,
         Tymon\JWTAuth\Providers\JWTAuthServiceProvider::class,
 
         /*

@@ -3,11 +3,17 @@ namespace Star\Icenter\Repos\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection;
 use Star\Icenter\Menu;
+use Star\Icenter\Profile;
 use Star\Icenter\Repos\Contracts\iUser;
 use Star\Icenter\User;
 
 class UserRepo implements iUser
 {
+	protected $user;
+	function __construct()
+	{
+		$this->user = new User();
+	}
         /**
          * 获取用户列表，显示基本资料，支持分页
          * @return json
@@ -15,7 +21,7 @@ class UserRepo implements iUser
 	public function getUserList()
 	{
 		if ( !isset($_GET['perpage']) ) {
-			$users = User::with('profiles')->get();
+			$users = $this->user->with('profiles')->get();
                       $result = [
                             $users->map(function ($item) {
                               return [
@@ -35,7 +41,7 @@ class UserRepo implements iUser
                             })
                           ];
 		} else {
-			$users = User::with('profiles')->paginate($_GET['perpage']);
+			$users = $this->user->with('profiles')->paginate($_GET['perpage']);
                       $data = collect($users->items());
                       $paginate = [
                         'total' => $users->total(),
@@ -74,8 +80,8 @@ class UserRepo implements iUser
    */
 	public function getUserInfo($id)
 	{
-              $user = User::findOrFail($id);
-		if ($user) {
+              $user = $this->user->findOrFail($id);
+		if ($user->profiles) {
 			return response()->json([
 					'id'         => $user->id,
 					'name'       => empty($user->profiles->realname) ? $user->mobile : $user->profiles->realname,
@@ -84,11 +90,11 @@ class UserRepo implements iUser
 					'avatar'     => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' : $user->profiles->avatar,
 					'role'       => empty($user->roles->first()['label']) ? '普通用户' : $user->roles->first()['label'],
 					'unit'       =>empty($user->unit->name) ? '尚未填写' : $user->unit->name,
-					'sex'        => $user->profiles->sex ? '男' : '女',
+					'sex'        => empty($user->profiles->sex ) ? '' : $user->profiles->sex,
 					'qq' => empty($user->profiles->qq) ? '尚未填写' : $user->profiles->qq,
 					'wechat' => empty($user->profiles->wechat) ? '尚未填写' : $user->profiles->wechat,
 					'birthplace' => empty($user->profiles->birthplace) ? '尚未填写' : $user->profiles->birthplace,
-                                  'birthday' => empty($user->profiles->birthYear.$user->profiles->birthMonth.$user->profiles->birthDay) ? '1900-1-1' : $user->profiles->birthYear.'-'.$user->profiles->birthMonth.'-'.$user->profiles->birthDay,
+                                  	'birthday' => $user->profiles->birthYear.'-'.$user->profiles->birthMonth.'-'.$user->profiles->birthDay,
 					'last_login' => $user->last_login,
 					'last_ip'    => $user->last_ip,
 					'menuList'   => $this->menuList(),
@@ -107,27 +113,33 @@ class UserRepo implements iUser
    */
       public function has($column, $value)
       {
-        return $this->user->where($column, $value)->first();
+        	return $this->user->where($column, $value)->first();
       }
 
       public function createUser($data)
       {
-
+      		$user = $this->user->create([
+      			'mobile' => $data['newMobile'],
+      			'password' => bcrypt($data['newPassword'])
+      		]);
+      		$profiles = Profile::create(['realname'=>$data['newMobile']]);
+      		$user->profiles()->save($profiles);
+      		return $user;
       }
 
       public function events($id)
       {
-      		$user = User::findOrFail($id);
+      		$user = $this->user->findOrFail($id);
       		return $user->events;
       }
 
       public function updateUser($id, $data)
       {
-      		$user = User::findOrFail($id);
+      		$user = $this->user->findOrFail($id);
       		$user->profiles->realname = $data['name'];
       		$user->profiles->birthYear = $this->splitBirthday($data['birthday']);
-      		$user->profiles->birthMonth = $this->splitBirthday($data['birthday'][1]);
-      		$user->profiles->birthDay = $this->splitBirthday($data['birthday'][2]);
+      		$user->profiles->birthMonth = $this->splitBirthday($data['birthday'], 1);
+      		$user->profiles->birthDay = $this->splitBirthday($data['birthday'], 2);
       		$user->profiles->sex = $data['sex'] == '男' ? 1 : 0; 
       		$user->profiles->qq = $data['qq'];
       		$user->email = $data['email'];

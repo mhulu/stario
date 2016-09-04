@@ -3,10 +3,10 @@
 namespace Star\Icenter\Forms;
 
 use App\Http\Requests\Request;
-use Star\Icenter\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Cache;
-use Star\Repos\Eloquent\UserRepo;
+use Star\Icenter\Repos\Eloquent\UserRepo;
+use Star\Icenter\User;
 
 class SignUpFormRequest extends FormRequest
 {
@@ -30,9 +30,9 @@ class SignUpFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'mobile' => 'required|max:11',
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation'=>'required|min:6',
+            'newMobile' => 'required|max:11',
+            'newPassword' => 'required|min:6|confirmed',
+            'newPassword_confirmation'=>'required|min:6',
             'authCode' => 'required'
         ];
     }
@@ -51,17 +51,16 @@ class SignUpFormRequest extends FormRequest
     {
         $request = $this->request->all();
         try {
-            if ($this->user->has('mobile', $request['mobile'])) {
+            if ($this->user->has('mobile', $request['newMobile'])) {
                 return response()->json(['result' => ['该手机号已经注册，请直接登陆']], 403);
-            } elseif ($request['authCode'] !== Cache::get($request['mobile'])) {
+            } elseif ($request['authCode'] !== Cache::get($request['newMobile'])) {
                 return response()->json(['result' => ['短信验证码填写错误']], 403);
             }
         } catch (Exception $e) {
                 return response()->json(['result' => [$e]], 500);
         }
 
-        $this->user->createUser($request); //调用 UserRepo方法
-        return response()->json(['result' => ['注册成功，请登陆']], 200);
+        return $this->user->createUser($request); //调用 UserRepo方法
     }
 
     private function updatePassword()
