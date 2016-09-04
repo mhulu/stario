@@ -3,7 +3,7 @@
 // header( 'Access-Control-Allow-Headers: Authorization, Content-Type' );
 // header('Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE');
 
-Route::any('test', 'TestController@server');
+Route::any('popUpload', 'PopController@server');
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
