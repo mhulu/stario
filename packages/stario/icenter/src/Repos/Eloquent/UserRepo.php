@@ -90,7 +90,7 @@ class UserRepo implements iUser
 					'avatar'     => empty($user->profiles->avatar) ? 'http://static.stario.net/images/avatar.png' : $user->profiles->avatar,
 					'role'       => empty($user->roles->first()['label']) ? '普通用户' : $user->roles->first()['label'],
 					'unit'       =>empty($user->unit->name) ? '尚未填写' : $user->unit->name,
-					'sex'        => empty($user->profiles->sex ) ? '' : $user->profiles->sex,
+					'sex'        => empty($user->profiles->sex ) ? '' : $user->profiles->sex==1 ? '男':'女',
 					'qq' => empty($user->profiles->qq) ? '尚未填写' : $user->profiles->qq,
 					'wechat' => empty($user->profiles->wechat) ? '尚未填写' : $user->profiles->wechat,
 					'birthplace' => empty($user->profiles->birthplace) ? '尚未填写' : $user->profiles->birthplace,
