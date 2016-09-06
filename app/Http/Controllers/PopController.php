@@ -19,8 +19,7 @@ class PopController extends Controller
       		$baseInfo = $data['jmxx'];
       		$sickInfo = $data['jcjgs'];
 
-      		dd($sickInfo);
-      		// return $this->responsor();
+      		return $this->responsor();
     }
     private function responsor()
     {
