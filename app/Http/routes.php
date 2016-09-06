@@ -4,6 +4,5 @@
 // header('Access-Control-Allow-Methods: GET, POST, OPTIONS, DELETE');
 
 Route::any('popUpload', 'PopController@server');
-Route::auth();
 
-Route::get('/home', 'HomeController@index');
+// Route::get('/home', 'HomeController@index');
