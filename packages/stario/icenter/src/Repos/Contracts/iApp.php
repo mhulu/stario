@@ -3,9 +3,17 @@ namespace Star\Icenter\Repos\Contracts;
 
 interface iApp
 {
-	public function appList();
-	public function addApp($data);
-	public function removeApp(array $ids);
-	public function editApp($id);
-	public function showApp($id);
+	public function all($columns = array('*'));
+
+	public function paginate($perPage = 15, $columns = array('*'));
+
+	public function create(array $data);
+
+	public function update(array $data, $id);
+
+	public function delete($id);
+
+	public function find($id, $columns = array('*'));
+
+	public function findBy($field, $value, $columns = array('*'))
 }

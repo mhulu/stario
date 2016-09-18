@@ -84,8 +84,8 @@ class CreateIcenterTables extends Migration
      */
     public function down()
     {
-        // Schema::drop('apps');
-        // Schema::drop('menus');
+        Schema::drop('apps');
+        Schema::drop('menus');
         Schema::drop('units');
         Schema::drop('profiles');
         Schema::drop('messages');

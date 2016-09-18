@@ -122,7 +122,9 @@ class UserRepo implements iUser
       			'mobile' => $data['newMobile'],
       			'password' => bcrypt($data['newPassword'])
       		]);
-      		$profiles = Profile::create(['realname'=>$data['newMobile']]);
+      		$profiles = Profile::create([
+                                      'realname'=>$data['newMobile']
+                                    ]);
       		$user->profiles()->save($profiles);
       		return $user;
       }

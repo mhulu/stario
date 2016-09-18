@@ -3,9 +3,17 @@ namespace Star\Icenter\Repos\Contracts;
 
 interface iUser
 {
-	// public function userInfo($uid);
-	// //Check users table if matched the  field and value.
-	// public function has($column, $value);
- //        public function messages($uid);
- //        public function isMobileExisted($mobile);
+	// public function all($columns = array('*'));
+
+	// public function paginate($perPage = 15, $columns = array('*'));
+
+	// public function create(array $data);
+
+	// public function update(array $data, $id);
+
+	// public function delete($id);
+
+	// public function find($id, $columns = array('*'));
+
+	// public function findBy($field, $value, $columns = array('*'))
 }

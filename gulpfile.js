@@ -1,4 +1,6 @@
 var elixir = require('laravel-elixir');
+require ('laravel-elixir-vueify');
+require('laravel-elixir-imagemin');
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +13,16 @@ var elixir = require('laravel-elixir');
  |
  */
 
+
+
+elixir.config.images = {
+    folder: 'img',
+    outputFolder: 'img'
+};
+
 elixir(function(mix) {
     mix.sass('app.scss');
+    mix.imagemin();
+    mix.browserify('main.js');
+    mix.browserify('init.js', './public/js/init.js');
 });
