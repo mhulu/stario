@@ -53,62 +53,64 @@ class IcenterSeeder extends Seeder
 		$app = App::create([
 			'name' => '内置应用',
 			'description' => 'WeMesh系统内置应用',
-			'icon' => 'fa-codepen'
+			'icon' => 'codepen'
 		]);
 		$menus = [
 	   // 父级菜单
+	   // 所有的url必须开头冠以'/'
+	   // 图标不需要加'fa-'
 			[
 				'name' => '控制面板',
 				'url' => '/',
-				'icon' => 'fa-dashboard',
+				'icon' => 'dashboard',
 				'description' => '管理控制中心',
 				'app_id' => 1,
 				'parent_id' => 0
 			],
-			[
-				'name' => '日程管理',
-				'url' => 'user/calendar',
-				'icon' => 'fa-calendar',
-				'description' => '用于管理个人日程',
-				'app_id' => 1,
-				'parent_id' => 0
-			],
-			[
-				'name' => '公告通知',
-				'url' => 'user/notify',
-				'icon' => 'fa-bell-o',
-				'description' => '管理控制中心',
-				'app_id' => 1,
-				'parent_id' => 0
-			],
+			// [
+			// 	'name' => '日程管理',
+			// 	'url' => '/user/calendar',
+			// 	'icon' => 'calendar',
+			// 	'description' => '用于管理个人日程',
+			// 	'app_id' => 1,
+			// 	'parent_id' => 0
+			// ],
+			// [
+			// 	'name' => '公告通知',
+			// 	'url' => '/user/notify',
+			// 	'icon' => 'bell-o',
+			// 	'description' => '管理控制中心',
+			// 	'app_id' => 1,
+			// 	'parent_id' => 0
+			// ],
 			[
 				'name' => '流动人口管理',
-				'url' => 'pop',
-				'icon' => 'fa-street-view',
+				'url' => '/pop',
+				'icon' => 'street-view',
 				'description' => '管理控制中心',
 				'app_id' => 1,
 				'parent_id' => 0
 			],
-			[
-				'name' => '资讯发布',
-				'url' => 'post',
-				'icon' => 'fa-send',
-				'description' => '日常新闻资讯发布',
-				'app_id' => 1,
-				'parent_id' => 0
-			],
+			// [
+			// 	'name' => '资讯发布',
+			// 	'url' => 'post',
+			// 	'icon' => 'send',
+			// 	'description' => '日常新闻资讯发布',
+			// 	'app_id' => 1,
+			// 	'parent_id' => 0
+			// ],
 			[
 				'name' => '用户管理',
-				'url' => 'users',
-				'icon' => 'fa-user',
+				'url' => '/users',
+				'icon' => 'user',
 				'description' => '修改个人资料',
 				'app_id' => 1,
 				'parent_id' => 0
 			],
 			[
 				'name' => '部门管理',
-				'url' => 'unit',
-				'icon' => 'fa-group',
+				'url' => '/unit',
+				'icon' => 'group',
 				'description' => '修改部门资料',
 				'app_id' => 1,
 				'parent_id' => 0
@@ -118,29 +120,21 @@ class IcenterSeeder extends Seeder
 		// 第一梯队 无
 		//第二梯队
 			[
-				'name' => '资讯统计',
-				'url' => 'news',
-				'icon' => 'reply_all',
-				'description' => '新闻资讯相关统计',
+				'name' => '新建档案',
+				'url' => '/pop/new',
+				'icon' => 'plus',
+				'description' => '创建一个流动人口档案',
 				'app_id' => 1,
-				'parent_id' => 4
+				'parent_id' => 2
 			],
 			[
-				'name' => '资讯编辑',
-				'url' => 'news/edit',
-				'icon' => 'fa-edit',
-				'description' => '新闻资讯编辑修改',
+				'name' => '编辑档案',
+				'url' => '/pop/edit',
+				'icon' => 'edit',
+				'description' => '编辑已有流动人口档案',
 				'app_id' => 1,
-				'parent_id' => 4
-			],
-			[
-				'name' => '自定义菜单',
-				'url' => 'news/menu',
-				'icon' => 'th-list',
-				'description' => '新闻资讯菜单管理',
-				'app_id' => 1,
-				'parent_id' => 4
-			],
+				'parent_id' => 2
+			]
 			// 第三梯队
 			// [
 			// 	'name' => '站内用户',
@@ -159,22 +153,22 @@ class IcenterSeeder extends Seeder
 			// 	'parent_id' => 3
 			// ],
 			//第四梯队
-			[
-				'name' => '修改部门资料',
-				'url' => 'unit',
-				'icon' => 'fa-group',
-				'description' => '修改部门资料',
-				'app_id' => 1,
-				'parent_id' => 6
-			],
-			[
-				'name' => '编辑部门人员',
-				'url' => 'unit',
-				'icon' => 'fa-group',
-				'description' => '编辑部门人员',
-				'app_id' => 1,
-				'parent_id' => 6
-			]
+			// [
+			// 	'name' => '修改部门资料',
+			// 	'url' => 'unit',
+			// 	'icon' => 'group',
+			// 	'description' => '修改部门资料',
+			// 	'app_id' => 1,
+			// 	'parent_id' => 7
+			// ],
+			// [
+			// 	'name' => '编辑部门人员',
+			// 	'url' => 'unit',
+			// 	'icon' => 'group',
+			// 	'description' => '编辑部门人员',
+			// 	'app_id' => 1,
+			// 	'parent_id' => 7
+			// ]
 		];
 		foreach ($menus as $menu) {
 			Menu::create($menu);
