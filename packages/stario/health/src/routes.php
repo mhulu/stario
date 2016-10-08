@@ -2,6 +2,8 @@
 
 Route::any('popUpload', 'PopController@server');
 Route::group(['prefix' => 'api', 'middleware' => 'throttle:60,1'], function () {
+	// 健康表选填内容
+	Route::get('classes', 'HealthController@classes');
 	// 表单下拉选项
 	Route::get('options', 'HealthController@options');
 

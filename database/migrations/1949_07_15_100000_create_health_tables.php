@@ -14,8 +14,8 @@ class CreateHealthTables extends Migration
     {
         Schema::create('pops', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('identify', 20);
-            $table->string('password', 60);
+            $table->string('identify', 20)->index();
+            $table->string('password', 66);
             $table->string('name', 10);
             $table->string('sex', 10);
             $table->string('phone', 20);
@@ -40,7 +40,8 @@ class CreateHealthTables extends Migration
         });
         Schema::create('geriatrics', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('identify', 20);
+            $table->string('identify', 20)->index();
+            $table->string('password', 66);
             $table->string('name', 10);
             $table->string('sex', 10);
             $table->string('phone', 20);
