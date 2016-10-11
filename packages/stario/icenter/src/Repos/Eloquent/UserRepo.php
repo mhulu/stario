@@ -2,10 +2,12 @@
 namespace Star\Icenter\Repos\Eloquent;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Facades\Response;
 use Star\Icenter\Menu;
 use Star\Icenter\Profile;
 use Star\Icenter\Repos\Contracts\iUser;
 use Star\Icenter\User;
+use Tymon\JWTAuth\Facades\JWTAuth;
 
 class UserRepo implements iUser
 {
@@ -115,8 +117,12 @@ class UserRepo implements iUser
       {
         	return $this->user->where($column, $value)->first();
       }
-
-      public function createUser($data)
+      /**
+       * 注册用户
+       * @param  [type] $data [description]
+       * @return 将token值返回
+       */
+      public function registerUser($data)
       {
       		$user = $this->user->create([
       			'mobile' => $data['newMobile'],
@@ -126,7 +132,8 @@ class UserRepo implements iUser
                                       'realname'=>$data['newMobile']
                                     ]);
       		$user->profiles()->save($profiles);
-      		return $user;
+                $token = JWTAuth::fromUser($user);
+                return Response::json(compact('token'));
       }
 
       public function events($id)
@@ -135,9 +142,9 @@ class UserRepo implements iUser
       		return $user->events;
       }
 
-      public function updateUser($id, $data)
+      public function updateUser($data)
       {
-      		$user = $this->user->findOrFail($id);
+      		$user = $this->user->where('mobile', $data['mobile']);
       		$user->profiles->realname = $data['name'];
       		$user->profiles->birthYear = $this->splitBirthday($data['birthday']);
       		$user->profiles->birthMonth = $this->splitBirthday($data['birthday'], 1);
@@ -146,6 +153,11 @@ class UserRepo implements iUser
       		$user->profiles->qq = $data['qq'];
       		$user->email = $data['email'];
       		return $user->profiles->save();
+      }
+
+      public function updatePassword($data)
+      {
+        return $this->user->where('mobile', $data['mobile'])->update(['password' => bcrypt($data['password'])]);
       }
 
       /**

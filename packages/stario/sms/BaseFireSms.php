@@ -13,7 +13,7 @@ use Psr\Http\Message\ResponseInterface;
 abstract class BaseFireSms
 {
 
-    protected $url; //[$url 短信代理商的API URL地址
+    protected $url; //$url 短信代理商的API URL地址
     protected $params; //通常由各类key组成，作为Guzzle的params参数数组发送HTTP请求
     protected $content; //短信内容
     protected $to; //手机号码

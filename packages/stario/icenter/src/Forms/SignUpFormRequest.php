@@ -30,9 +30,8 @@ class SignUpFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'newMobile' => 'required|max:11',
-            'newPassword' => 'required|min:6|confirmed',
-            'newPassword_confirmation'=>'required|min:6',
+            'mobile' => 'required|max:11',
+            'password' => 'required',
             'authCode' => 'required'
         ];
     }
@@ -40,27 +39,31 @@ class SignUpFormRequest extends FormRequest
     // 存储入库，如果发现?findpass则更新密码
     public function persist()
     {
+        $request = $this->request->all();
+        $authCode = $request['authCode'];
+        $mobile = $request['mobile'];
+        if (\Cache::get($mobile)!=$authCode) {
+            return response()->json(['result' => ['您输入的验证码不正确']], 403);
+        }
         if (isset($_GET['findpass'])) {
             return $this->updatePassword();
         } else {
-            return $this->createUser();
+            return $this->register();
         }
     }
 
-    private function createUser()
+    private function register()
     {
         $request = $this->request->all();
         try {
-            if ($this->user->has('mobile', $request['newMobile'])) {
+            if ($this->user->has('mobile', $request['mobile'])) {
                 return response()->json(['result' => ['该手机号已经注册，请直接登陆']], 403);
-            } elseif ($request['authCode'] !== Cache::get($request['newMobile'])) {
-                return response()->json(['result' => ['短信验证码填写错误']], 403);
-            }
+            } 
         } catch (Exception $e) {
                 return response()->json(['result' => [$e]], 500);
         }
 
-        return $this->user->createUser($request); //调用 UserRepo方法
+        return $this->user->registerUser($request); //调用 UserRepo方法
     }
 
     private function updatePassword()
@@ -74,7 +77,7 @@ class SignUpFormRequest extends FormRequest
         } catch (Exception $e) {
                 return response()->json(['result' => [$e]], 500);
         }
-        $this->user->updateUser($request); //调用 UserRepo方法
-        return response()->json(['result' => ['密码重置成功，请重新登陆']], 200);
+        $this->user->updatePassword($request); //调用 UserRepo方法
+        return response()->json(['result' => ['密码修改成功，请重新登陆']], 200);
     }
 }

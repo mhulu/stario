@@ -19,17 +19,6 @@ class AuthController extends Controller
     //     $this->middleware('jwt.auth', ['except' => ['login']]);
     // }
 
-    public function register(Request $request)
-    {
-        $input = $request->all();
-        $input['password'] = Hash::make($input['password']);
-        User::create($input);
-        return response()->json([
-          'code' => 200,
-          'result' => true
-          ]);
-    }
-    
     public function login(Request $request)
     {
            $credentials = $request->only('mobile', 'password');
@@ -44,12 +33,13 @@ class AuthController extends Controller
         }
         // if no errors are encountered we can return a JWT
         Event::fire(new LoginEvent(User::find(Auth::user()->id)));
-         return response()->json([
-          'result' => [
-          	'id' => Auth::user()->id,
-          	'token' => $token
-          ]
-          ], 200);
+        return response()->json($token, 200);
+         // return response()->json([
+         //  'result' => [
+         //  	'id' => Auth::user()->id,
+         //  	'token' => $token
+         //  ]
+         //  ], 200);
     }
 
     public function refreshToken(Request $request)

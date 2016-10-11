@@ -15,16 +15,16 @@ class MakeSMS
     * @param  [type]  $key   [缓存key，如手机号码]
     * @param  integer $len [验证码位数]
     */
-    public function makeCode($key, $len = 6)
+    public static function makeCode($key, $len = 6)
     {
-    	$code = $this->randomNum($len);
+    	$code = self::randomNum($len);
     	Cache::put($key, $code, 5);
     	$pattern = '/{\w+}/';
         	$content = preg_replace($pattern, $code, \Config::get('sms.Templates.authcode'));
         	return $content;
     }
 
-    private function randomNum($len = 4)
+    private static function randomNum($len = 4)
     {
         return str_pad(rand(0, pow(10, $len) -1), $len, '0', STR_PAD_LEFT);
     }
