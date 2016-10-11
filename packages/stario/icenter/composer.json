@@ -2,9 +2,7 @@
     "name": "stario/icenter",
     "version": "0.1.0",
     "require": {
-        "stario/permission": "^0.1.*",
-        "tymon/jwt-auth": "0.5.*",
-        "barryvdh/laravel-cors": "^0.8.1"
+        "stario/permission": "^0.1.*"
     },
     "authors": [
         {
